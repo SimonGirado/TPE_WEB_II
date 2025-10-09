@@ -36,7 +36,7 @@ class MoviesController {
     $duracion = intval($_POST['duracion']);
     $puntaje = floatval($_POST['puntaje']);
     $genero = intval($_POST['genero']);
-    $imagen = $_FILES['imagen'] ?? null;
+    $imagen = $_FILES['img'] ?? null;
 
 
     //valido que hayan mandado todo
