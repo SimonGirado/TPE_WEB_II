@@ -23,9 +23,9 @@ class MoviesController {
 
     $titulo = $_POST['titulo'];
     $sinopsis = $_POST['sinopsis'];
-    $duracion = $_POST['duracion'];
-    $puntaje = $_POST['puntaje'];
-    $genero = $_POST['genero'];
+    $duracion = intval($_POST['duracion']);
+    $puntaje = floatval($_POST['puntaje']);
+    $genero = intval($_POST['genero']);
 
 
     //valido que hayan mandado todo
