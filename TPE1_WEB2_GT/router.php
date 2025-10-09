@@ -8,6 +8,7 @@ $action = 'home'; // accion por defecto si no se envia ninguna
 if (!empty( $_GET['action'])) {
     $action = $_GET['action'];
 }
+// anadir -> addMovie();
 
 // parsea la accion para separar accion real de parametros
 $params = explode('/', $action);
@@ -16,6 +17,9 @@ switch ($params[0]) {
     case 'home':
         $controller = new MoviesController();
         $controller->showMovies();
+        break;
+    case 'anadir':
+        addMovie();
         break;
     default:
         echo "404 Page Not Found";

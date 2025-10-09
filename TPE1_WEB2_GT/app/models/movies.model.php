@@ -19,4 +19,11 @@ class MoviesModel{
 
         return $movies;
     }
+
+    function insertMovie($titulo, $sinopsis, $duracion, $genero, $puntaje){
+        $db = $this->getConnection();
+        /*INSERT INTO `peliculas` (`id`, `titulo`, `sinopsis`, `duracion`, `id_genero`, `puntaje_promedio`) */
+        $query = $db->prepare('INSERT INTO `peliculas`(titulo, sinopsis, duracion, id_genero, puntaje_promedio) VALUES (?, ?, ?, ?, ?');
+        $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje]);
+    }
 }
