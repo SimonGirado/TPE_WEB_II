@@ -11,4 +11,10 @@ class MoviesView{
         require_once 'templates/form.add.php';
         require_once 'templates/footer.php';
     }
+
+    function showError($msg){
+        echo "<h1> ERROR! </h1>";
+        echo "<h2> $msg </h2>";
+
+    }
 }

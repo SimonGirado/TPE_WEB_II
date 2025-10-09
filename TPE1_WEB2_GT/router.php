@@ -19,7 +19,8 @@ switch ($params[0]) {
         $controller->showMovies();
         break;
     case 'anadir':
-        addMovie();
+        $controller = new MoviesController();
+        $controller->addMovie();
         break;
     default:
         echo "404 Page Not Found";

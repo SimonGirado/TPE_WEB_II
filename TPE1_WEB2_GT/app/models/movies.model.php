@@ -2,7 +2,7 @@
 
 class MoviesModel{
 
-    function getConnection() {
+    private function getConnection() {
         return new PDO('mysql:host=localhost;dbname=movies_db;charset=utf8', 'root', '');
     }
 
@@ -21,9 +21,15 @@ class MoviesModel{
     }
 
     function insertMovie($titulo, $sinopsis, $duracion, $genero, $puntaje){
+        
         $db = $this->getConnection();
+
         /*INSERT INTO `peliculas` (`id`, `titulo`, `sinopsis`, `duracion`, `id_genero`, `puntaje_promedio`) */
         $query = $db->prepare('INSERT INTO `peliculas`(titulo, sinopsis, duracion, id_genero, puntaje_promedio) VALUES (?, ?, ?, ?, ?');
+
+
         $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje]);
+
+        return $db->lastInsertId();
     }
 }
