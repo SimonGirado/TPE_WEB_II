@@ -15,6 +15,16 @@ class MoviesController {
     function showMovies() {
         $movies = $this->model->getMovies();
 
+        foreach ($movies as $pelicula) {
+            if ($pelicula->img) {
+                // Convertimos a Base64 para la vista
+                $pelicula->imagen_base64 = base64_encode($pelicula->img);
+                $pelicula->mime = 'image/jpeg';
+            } else {
+                $pelicula->imagen_base64 = null;
+            }
+        }
+
         $this->view->showMovies($movies);
 
     }
@@ -26,6 +36,7 @@ class MoviesController {
     $duracion = intval($_POST['duracion']);
     $puntaje = floatval($_POST['puntaje']);
     $genero = intval($_POST['genero']);
+    $imagen = $_FILES['imagen'] ?? null;
 
 
     //valido que hayan mandado todo
@@ -35,7 +46,7 @@ class MoviesController {
     }
 
     
-    $id = $this->model->insertMovie($titulo, $sinopsis, $duracion, $genero, $puntaje);
+    $id = $this->model->insertMovie($titulo, $sinopsis, $duracion, $genero, $puntaje, $imagen);
 
     header("Location: " . BASE_URL);
 }

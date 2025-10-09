@@ -1,5 +1,5 @@
 <!-- formulario de alta de pelicula -->
-<form action="anadir" method="POST" class="my-4">
+<form action="anadir" method="POST" class="my-4" enctype="multipart/form-data">
     <div class="row">
         <div class="col-9">
             <div class="form-group">
@@ -36,6 +36,8 @@
         <label>Puntaje</label>
         <textarea name="puntaje" class="form-control" rows="2"></textarea>
     </div>
+
+    <input type="file" name="img" accept="image/*">
 
     <button type="submit" class="btn btn-primary mt-2">Guardar</button>
 </form>

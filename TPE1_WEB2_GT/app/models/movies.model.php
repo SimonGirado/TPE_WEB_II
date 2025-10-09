@@ -20,15 +20,19 @@ class MoviesModel{
         return $movies;
     }
 
-    function insertMovie($titulo, $sinopsis, $duracion, $genero, $puntaje){
+    function insertMovie($titulo, $sinopsis, $duracion, $genero, $puntaje, $img = null){
 
         $db = $this->getConnection();
 
         /*INSERT INTO `peliculas` (`id`, `titulo`, `sinopsis`, `duracion`, `id_genero`, `puntaje_promedio`) */
-        $query = $db->prepare('INSERT INTO peliculas (titulo, sinopsis, duracion, id_genero, puntaje_promedio) VALUES (?, ?, ?, ?, ?)');
+        $query = $db->prepare('INSERT INTO peliculas (titulo, sinopsis, duracion, id_genero, puntaje_promedio, img) VALUES (?, ?, ?, ?, ?, ?)');
 
+        $imagenData = null;
+        if ($img && $img['error'] === UPLOAD_ERR_OK) {
+            $imagenData = file_get_contents($img['tmp_name']);
+        }
 
-        $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje]);
+        $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData]);
 
         return $db->lastInsertId();
     }
