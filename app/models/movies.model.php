@@ -36,4 +36,11 @@ class MoviesModel{
 
         return $db->lastInsertId();
     }
+
+    function removeMovie($id){
+        $db = $this->getConnection();
+
+        $query = $db->prepare('DELETE FROM peliculas WHERE id = ?');
+        $query->execute([$id]);
+    }
 }

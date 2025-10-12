@@ -49,6 +49,10 @@ class MoviesController {
     $id = $this->model->insertMovie($titulo, $sinopsis, $duracion, $genero, $puntaje, $imagen);
 
     header("Location: " . BASE_URL);
-}
+    }
 
+    function deleteMovie($id){
+        $this->model->removeMovie($id);
+        header("Location: " . BASE_URL);
+    }
 }

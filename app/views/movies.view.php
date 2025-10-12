@@ -31,6 +31,7 @@ function showMovies($movies){
                 <p><?= htmlspecialchars($movie->sinopsis) ?></p>
                 <p><strong>Duración:</strong> <?= $movie->duracion ?> min</p>
                 <p><strong>Puntaje:</strong> <?= $movie->puntaje_promedio ?></p>
+                <a href="eliminar/<?php echo $movie->id ?>" type="button" class="btn btn-outline-danger">Eliminar</a>
             </div>
         </div>
     <?php endforeach; ?>
