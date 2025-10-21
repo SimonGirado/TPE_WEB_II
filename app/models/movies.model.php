@@ -1,17 +1,22 @@
 <?php
+require_once 'config.php';
 
 class MoviesModel{
+    private $db;
 
-    private function getConnection() {
-        return new PDO('mysql:host=localhost;dbname=movies_db;charset=utf8', 'root', '');
+    public function __construct()
+    {
+        $this->db = new PDO("mysql:host=".MYSQL_HOST.
+                            ";dbname=".MYSQL_DB.
+                            ";charset=utf8",
+                            MYSQL_USER,MYSQL_PASS);
+        $this->_deploy();
     }
 
     function getMovies() {
-        // 1. abro conexión con la DB
-        $db = $this->getConnection();
 
         // 2. ejecuto la consulta SQL (SELECT * FROM tareas)
-        $query = $db->prepare('SELECT * FROM peliculas');
+        $query = $this->db->prepare('SELECT * FROM peliculas');
         $query->execute();
 
         // 3. obtengo los resultados de la consulta
@@ -22,10 +27,9 @@ class MoviesModel{
 
     function insertMovie($titulo, $sinopsis, $duracion, $genero, $puntaje, $img = null){
 
-        $db = $this->getConnection();
 
         /*INSERT INTO `peliculas` (`id`, `titulo`, `sinopsis`, `duracion`, `id_genero`, `puntaje_promedio`) */
-        $query = $db->prepare('INSERT INTO peliculas (titulo, sinopsis, duracion, id_genero, puntaje_promedio, img) VALUES (?, ?, ?, ?, ?, ?)');
+        $query = $this->db->prepare('INSERT INTO peliculas (titulo, sinopsis, duracion, id_genero, puntaje_promedio, img) VALUES (?, ?, ?, ?, ?, ?)');
 
         $imagenData = null;
         if ($img && $img['error'] === UPLOAD_ERR_OK) {
@@ -34,13 +38,24 @@ class MoviesModel{
 
         $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData]);
 
-        return $db->lastInsertId();
+        return $this->db->lastInsertId();
     }
 
     function removeMovie($id){
-        $db = $this->getConnection();
 
-        $query = $db->prepare('DELETE FROM peliculas WHERE id = ?');
+        $query = $this->db->prepare('DELETE FROM peliculas WHERE id = ?');
         $query->execute([$id]);
     }
+
+
+    private function _deploy() {
+        $query = $this->db->query('SHOW TABLES');
+        $tables = $query->fetchAll();
+        if(count($tables) == 0) {
+            $sql =<<<END
+            END;
+        $this->db->query($sql);
+    }
+    }
+
 }
