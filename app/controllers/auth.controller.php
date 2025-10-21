@@ -29,7 +29,7 @@ class AuthController {
         // Verifico que el user esta en la db
         $userFromDB = $this->model->getUserByEmail($email);
 
-        if(password_verify($password, $userFromDB->password)){
+        if($userFromDB && password_verify($password, $userFromDB->password)){
             //guardo en la sesion el id del user
             session_start();
             $_SESSION['ID_USER'] = $userFromDB->id;
@@ -42,5 +42,11 @@ class AuthController {
             return $this->view->showLogin('Credenciales incorrectas');
         }
 
+    }
+
+    public function logout(){
+        session_start();
+        session_destroy();
+        header('Location: ' . BASE_URL);
     }
 }

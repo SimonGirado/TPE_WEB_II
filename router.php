@@ -1,6 +1,7 @@
 <?php
 require_once 'libs/response.php';
 require_once 'app/middlewares/session.auth.middleware.php';
+require_once 'app/middlewares/verify.auth.middleware.php';
 require_once 'app/controllers/movies.controller.php';
 require_once 'app/controllers/auth.controller.php';
 
@@ -34,11 +35,13 @@ switch ($params[0]) {
         break;
     case 'anadir':
         sessionAuthMiddleware($res);
+        verifyAuthMiddleware($res);
         $controller = new MoviesController($res);
         $controller->addMovie();
         break;
     case 'eliminar':
         sessionAuthMiddleware($res);
+        verifyAuthMiddleware($res);
         $controller = new MoviesController($res);
         $controller->deleteMovie($params[1]);
         break;
@@ -49,6 +52,10 @@ switch ($params[0]) {
     case 'showLogin':
         $controller = new AuthController();
         $controller->showLogin();
+        break;
+    case 'logout':
+        $controller = new AuthController();
+        $controller->logout();
         break;
     default:
         echo "404 Page Not Found";
