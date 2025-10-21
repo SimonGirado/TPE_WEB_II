@@ -9,9 +9,7 @@ require_once 'app/controllers/auth.controller.php';
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
 
-
 $res = new Response();
-
 
 
 $action = 'home'; // accion por defecto si no se envia ninguna
@@ -30,17 +28,18 @@ $params = explode('/', $action);
 
 switch ($params[0]) {
     case 'home':
-        $controller = new MoviesController();
+        sessionAuthMiddleware($res);
+        $controller = new MoviesController($res);
         $controller->showMovies();
         break;
     case 'anadir':
         sessionAuthMiddleware($res);
-        $controller = new MoviesController();
+        $controller = new MoviesController($res);
         $controller->addMovie();
         break;
     case 'eliminar':
         sessionAuthMiddleware($res);
-        $controller = new MoviesController();
+        $controller = new MoviesController($res);
         $controller->deleteMovie($params[1]);
         break;
     case 'login':

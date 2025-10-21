@@ -7,9 +7,9 @@ class MoviesController {
     private $model;
     private $view;
 
-    function __construct(){
+    function __construct($res){
         $this->model = new MoviesModel();
-        $this->view = new MoviesView();
+        $this->view = new MoviesView($res->user);
     }
 
     function showMovies() {
