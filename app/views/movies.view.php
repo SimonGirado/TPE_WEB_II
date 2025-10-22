@@ -25,6 +25,7 @@ class MoviesView{
                     <p><strong>Duración:</strong> <?= $movie->duracion ?> min</p>
                     <p><strong>Puntaje:</strong> <?= $movie->puntaje_promedio ?></p>
                     <a href="eliminar/<?php echo $movie->id ?>" type="button" class="btn btn-outline-danger">Eliminar</a>
+                    <a href="updateMovie/<?php echo $movie->id ?>" type="button" class="btn btn-outline-danger">editar</a>
                 </div>
             </div>
         <?php endforeach; ?>

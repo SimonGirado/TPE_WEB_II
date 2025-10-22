@@ -1,42 +1,31 @@
-<form action="modifier" method="post">
-<div class="row">
-        <div class="col-9">
-            <div class="form-group">
-                <label>Título</label>
-                <input required name="titulo" type="text" class="form-control">
-            </div>
-        </div>
+<?php require_once 'templates/header.phtml'; ?>
 
-        <div class="col-3">
-            <div class="form-group">
-                <label>Genero</label>
-                <select required name="genero" class="form-control">
-                    <option value="1">Accion</option>
-                    <option value="2">Comedia</option>
-                    <option value="3">Drama</option>
-                    <option value="4">Ciencia Ficcion</option>
-                    <option value="5">Terror</option>
-                </select>
-            </div>
-        </div>
-    </div>
+<form action="updateMovie/<?= $movie->$id ?>" method="POST">
+    <h1 class="form-h1">Editar Película</h1>
 
-    <div class="form-group">
-        <label>Sinopsis</label>
-        <textarea name="sinopsis" class="form-control" rows="2"></textarea>
-    </div>
+    <label>Editar titulo:</label>
+    <input type="text"  name="titulo" value="<?= htmlspecialchars($movie->$titulo) ?>" required>
 
-    <div class="form-group">
-        <label>Duracion</label>
-        <textarea name="duracion" class="form-control" rows="2"></textarea>
-    </div>
+    <label>Editar duracion:</label>
+    <textarea name="duracion" class="form-control" rows="2"></textarea>
 
-    <div class="form-group">
-        <label>Puntaje</label>
-        <textarea name="puntaje" class="form-control" rows="2"></textarea>
-    </div>
+
+    <label >Editar sinopsis:</label>
+    <textarea name="sinopsis" class="form-control" rows="2"></textarea>
+
+    <label>Editar puntaje:</label>
+    <textarea name="puntaje" class="form-control" rows="2"></textarea>
+    
+    <label >Editar genero:</label>
+        <select required name="genero" class="form-control">
+                <option value="1">Accion</option>
+                <option value="2">Comedia</option>
+                <option value="3">Drama</option>
+                <option value="4">Ciencia Ficcion</option>
+                <option value="5">Terror</option>
+        </select>
 
     <input type="file" name="img" accept="image/*">
-
-    <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+    <button type="submit">Actualizar película</button>
 </form>
+<?php require_once 'templates/footer.phtml'; ?>

@@ -51,6 +51,29 @@ class MoviesController {
     header("Location: " . BASE_URL);
     }
 
+    function updateMovie($id){
+         if (isset($_POST['titulo']) && !empty($_POST['titulo']) &&
+            isset($_POST['sinopsis']) && !empty($_POST['sinopsis']) &&
+            isset($_POST['duracion']) && !empty($_POST['duracion']) &&
+            isset($_POST['puntaje']) && !empty($_POST['puntaje']) &&
+            isset($_POST['genero']) && !empty($_POST['genero']))
+            {   
+                $titulo = $_POST['titulo'];
+                $sinopsis = $_POST['sinopsis'];
+                $duracion = intval($_POST['duracion']);
+                $puntaje = floatval($_POST['puntaje']);
+                $genero = intval($_POST['genero']);
+                $imagenData = $_FILES['img'] ?? null;
+                $this->model->updateMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData);
+            }
+            header("Location: " . BASE_URL);
+        //valido que hayan mandado todo
+
+        }
+
+    
+
+
     function deleteMovie($id){
         $this->model->removeMovie($id);
         header("Location: " . BASE_URL);

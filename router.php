@@ -57,6 +57,15 @@ switch ($params[0]) {
         $controller = new AuthController();
         $controller->logout();
         break;
+    case 'updateMovie':
+        sessionAuthMiddleware($res);
+        verifyAuthMiddleware($res);
+        if (isset($params[1])) {
+            $controller = new MoviesController($res);
+            $controller->updateMovie($params[1]);
+            }
+        break;
+
     default:
         echo "404 Page Not Found";
         break;

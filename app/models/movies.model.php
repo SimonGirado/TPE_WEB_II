@@ -47,6 +47,10 @@ class MoviesModel{
         $query->execute([$id]);
     }
 
+    function updateMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData){
+         $query = $this->db->prepare('UPDATE peliculas SET titulo = ?, sinopsis = ?, duracion = ?, id_genero = ?, puntaje_promedio = ?, img = ? WHERE id = ?');
+         $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData, $id]);
+    }
 
     private function _deploy() {
         $query = $this->db->query('SHOW TABLES');
