@@ -56,6 +56,8 @@ class MoviesModel{
             END;
         $this->db->query($sql);
     }
+    // Entre los dos END deberia poner el script de creacion de tablas, pero como la cadena de caracteres supera por muchisimo el limite 
+    // de caracteres permitidos, lo dejo asi para no tener errores, intente varias cosas para que funcione pero no pude.
     }
 
 }
