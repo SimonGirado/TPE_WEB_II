@@ -1,32 +1,33 @@
 <?php require_once 'templates/header.phtml'; ?>
 
-<form action="updateMovie/<?= $movie->id ?>" method="POST">
+<form action="<?= BASE_URL ?>updateMovie/<?= $movie->id ?>" method="POST" enctype="multipart/form-data">
     <h1 class="form-h1">Editar Película</h1>
 
-    <label>Editar titulo:</label>
-    <input type="text"  name="titulo" value="<?= htmlspecialchars($movie->titulo) ?>" required>
+    <label>Título:</label>
+    <input type="text" name="titulo" value="<?= htmlspecialchars($movie->titulo) ?>" required>
 
-    <label>Editar duracion:</label>
-    <textarea name="duracion" class="form-control" rows="2"></textarea>
+    <label>Duración (minutos):</label>
+    <input type="number" name="duracion" value="<?= htmlspecialchars($movie->duracion) ?>" required>
 
+    <label>Sinopsis:</label>
+    <textarea name="sinopsis" class="form-control" rows="3" required><?= htmlspecialchars($movie->sinopsis) ?></textarea>
 
-    <label >Editar sinopsis:</label>
-    <textarea name="sinopsis" class="form-control" rows="2"></textarea>
+    <label>Puntaje promedio:</label>
+    <input type="number" step="0.1" name="puntaje" value="<?= htmlspecialchars($movie->puntaje_promedio) ?>" required>
 
-    <label>Editar puntaje:</label>
-    <textarea name="puntaje" class="form-control" rows="2"></textarea>
-    
-    <label >Editar genero:</label>
-        <select required name="genero" class="form-control">
-                <option value="1">Accion</option>
-                <option value="2">Comedia</option>
-                <option value="3">Drama</option>
-                <option value="4">Ciencia Ficcion</option>
-                <option value="5">Terror</option>
-        </select>
+    <label>Género:</label>
+    <select required name="genero" class="form-control">
+        <option value="1" <?= $movie->id_genero == 1 ? 'selected' : '' ?>>Acción</option>
+        <option value="2" <?= $movie->id_genero == 2 ? 'selected' : '' ?>>Comedia</option>
+        <option value="3" <?= $movie->id_genero == 3 ? 'selected' : '' ?>>Drama</option>
+        <option value="4" <?= $movie->id_genero == 4 ? 'selected' : '' ?>>Ciencia Ficción</option>
+        <option value="5" <?= $movie->id_genero == 5 ? 'selected' : '' ?>>Terror</option>
+    </select>
 
+    <label>Imagen:</label>
     <input type="file" name="img" accept="image/*">
-    <button type="submit">Actualizar película</button>
-    <a href="updateMovie/<?= $movie->id?>" class="btn btn-primary">Submit</a>
+
+    <button type="submit" class="btn btn-primary mt-2">Actualizar Película</button>
 </form>
+
 <?php require_once 'templates/footer.phtml'; ?>

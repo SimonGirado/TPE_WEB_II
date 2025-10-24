@@ -63,15 +63,22 @@ class MoviesController {
                 $duracion = intval($_POST['duracion']);
                 $puntaje = floatval($_POST['puntaje']);
                 $genero = intval($_POST['genero']);
-                $imagenData = $_FILES['img'] ?? null;
+                $imagenData = null;
+                if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
+                    $imagenData = file_get_contents($_FILES['img']['tmp_name']);
+                }
+
                 $this->model->refreshMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData);
+            } else {
+                $this->view->showError("Datos incompletos en la edición");
+                die();
             }
             header("Location: " . BASE_URL);
         //valido que hayan mandado todo
 
         }
 
-    
+
     function showEdit($id){
         $movie = $this->model->getItemById($id);
         if($movie){

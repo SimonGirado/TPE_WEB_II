@@ -53,10 +53,36 @@ class MoviesModel{
         $query->execute([$id]);
     }
 
-    function refreshMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData){
-         $query = $this->db->prepare('UPDATE peliculas SET titulo = ?, sinopsis = ?, duracion = ?, id_genero = ?, puntaje_promedio = ?, img = ? WHERE id = ?');
-         $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData, $id]);
+    /*function refreshMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData = null) {
+        if ($imagenData !== null) {
+            $query = $this->db->prepare('UPDATE peliculas 
+                SET titulo = ?, sinopsis = ?, duracion = ?, id_genero = ?, puntaje_promedio = ?, img = ? 
+                WHERE id = ?');
+            $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData, $id]);
+        } else {
+            $query = $this->db->prepare('UPDATE peliculas 
+                SET titulo = ?, sinopsis = ?, duracion = ?, id_genero = ?, puntaje_promedio = ? 
+                WHERE id = ?');
+            $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje, $id]);
+        }
+    }*/
+        function refreshMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData = null) {
+    if ($imagenData !== null) {
+        $query = $this->db->prepare('UPDATE peliculas 
+            SET titulo = ?, sinopsis = ?, duracion = ?, id_genero = ?, puntaje_promedio = ?, img = ? 
+            WHERE id = ?');
+        $ok = $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData, $id]);
+    } else {
+        $query = $this->db->prepare('UPDATE peliculas 
+            SET titulo = ?, sinopsis = ?, duracion = ?, id_genero = ?, puntaje_promedio = ? 
+            WHERE id = ?');
+        $ok = $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje, $id]);
     }
+
+}
+
+
+
 
     private function _deploy() {
         $query = $this->db->query('SHOW TABLES');
