@@ -57,6 +57,12 @@ switch ($params[0]) {
         $controller = new AuthController();
         $controller->logout();
         break;
+    case 'showEdit':
+        if (isset($params[1])) {
+        $controller = new MoviesController($res);
+        $controller->showEdit($params[1]);
+        }
+        break;
     case 'updateMovie':
         sessionAuthMiddleware($res);
         verifyAuthMiddleware($res);

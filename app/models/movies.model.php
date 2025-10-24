@@ -13,6 +13,12 @@ class MoviesModel{
         $this->_deploy();
     }
 
+    function getItemById($id){
+        $query = $this->db->prepare("SELECT * FROM peliculas WHERE id = ?");
+        $query->execute([$id]);
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
     function getMovies() {
 
         // 2. ejecuto la consulta SQL (SELECT * FROM tareas)
@@ -47,7 +53,7 @@ class MoviesModel{
         $query->execute([$id]);
     }
 
-    function updateMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData){
+    function refreshMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData){
          $query = $this->db->prepare('UPDATE peliculas SET titulo = ?, sinopsis = ?, duracion = ?, id_genero = ?, puntaje_promedio = ?, img = ? WHERE id = ?');
          $query->execute([$titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData, $id]);
     }

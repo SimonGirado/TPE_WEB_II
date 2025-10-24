@@ -64,7 +64,7 @@ class MoviesController {
                 $puntaje = floatval($_POST['puntaje']);
                 $genero = intval($_POST['genero']);
                 $imagenData = $_FILES['img'] ?? null;
-                $this->model->updateMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData);
+                $this->model->refreshMovie($id, $titulo, $sinopsis, $duracion, $genero, $puntaje, $imagenData);
             }
             header("Location: " . BASE_URL);
         //valido que hayan mandado todo
@@ -72,7 +72,15 @@ class MoviesController {
         }
 
     
-
+    function showEdit($id){
+        $movie = $this->model->getItemById($id);
+        if($movie){
+            $this->view->showEditForm($movie);
+        }
+        else {
+            header("Location: " . BASE_URL);
+        }
+    }
 
     function deleteMovie($id){
         $this->model->removeMovie($id);

@@ -25,7 +25,7 @@ class MoviesView{
                     <p><strong>Duración:</strong> <?= $movie->duracion ?> min</p>
                     <p><strong>Puntaje:</strong> <?= $movie->puntaje_promedio ?></p>
                     <a href="eliminar/<?php echo $movie->id ?>" type="button" class="btn btn-outline-danger">Eliminar</a>
-                    <a href="updateMovie/<?php echo $movie->id ?>" type="button" class="btn btn-outline-danger">Editar</a>
+                    <a href="showEdit/<?php echo $movie->id ?>" type="button" class="btn btn-outline-danger">Editar</a>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -36,7 +36,9 @@ class MoviesView{
         require_once 'templates/footer.phtml';
     }
 
-
+    function showEditForm($movie){
+        require_once 'templates/modifier.phtml';
+    }
         function showError($msg){
             echo "<h1> ERROR! </h1>";
             echo "<h2> $msg </h2>";
