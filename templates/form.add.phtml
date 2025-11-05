@@ -1,4 +1,6 @@
 <!-- formulario de alta de pelicula -->
+<h1>Añadir pelicula</h1>
+
 <form action="anadir" method="POST" class="my-4" enctype="multipart/form-data">
     <div class="row">
         <div class="col-9">
@@ -28,13 +30,28 @@
     </div>
 
     <div class="form-group">
-        <label>Duracion</label>
-        <textarea name="duracion" class="form-control" rows="2"></textarea>
+        <label>Duración (minutos)</label>
+        <input 
+            type="number" 
+            name="duracion" 
+            class="form-control" 
+            min="0" 
+            step="1" 
+            required
+        >
     </div>
 
     <div class="form-group">
-        <label>Puntaje</label>
-        <textarea name="puntaje" class="form-control" rows="2"></textarea>
+        <label>Puntaje (0 a 10)</label>
+        <input 
+            type="number" 
+            name="puntaje" 
+            class="form-control" 
+            min="0" 
+            max="10" 
+            step="1" 
+            required
+        >
     </div>
 
     <input type="file" name="img" accept="image/*">

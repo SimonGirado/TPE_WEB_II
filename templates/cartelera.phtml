@@ -1,0 +1,23 @@
+<?php foreach($movies as $movie): ?>
+    <div class="movie-card">
+
+        <?php if (!empty($movie->imagen_base64)): ?>
+        <img src="data:<?= $movie->mime ?>;base64,<?= $movie->imagen_base64 ?>"
+        alt="<?= htmlspecialchars($movie->titulo) ?>">
+
+        <?php else: ?>
+            <div class="placeholder-img">Sin imagen</div>
+        <?php endif; ?>
+
+                <div class="movie-info">
+                    <h3><?= htmlspecialchars($movie->titulo) ?></h3>
+                    <p><?= htmlspecialchars($movie->sinopsis) ?></p>
+                    <p><strong>Duración:</strong> <?= $movie->duracion ?> min</p>
+                    <p><strong>Puntaje:</strong> <?= $movie->puntaje_promedio ?></p>
+                    <?php if($this->user):?>
+                    <a href="eliminar/<?php echo $movie->id ?>" type="button" class="btn btn-outline-danger">Eliminar</a>
+                    <a href="showEdit/<?php echo $movie->id ?>" type="button" class="btn btn-outline-danger">Editar</a>
+                    <?php endif ?>
+                </div>
+    </div>
+        <?php endforeach; ?>

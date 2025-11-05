@@ -38,6 +38,15 @@ class MoviesController {
     $genero = intval($_POST['genero']);
     $imagen = $_FILES['img'] ?? null;
 
+    
+    $limite = 1 * 1024 * 1024;
+
+    if ($imagen && $imagen['error'] === UPLOAD_ERR_OK) {
+        if ($imagen['size'] > $limite) {
+            $this->view->showError("La imagen supera el tamaño máximo permitido (1 MB)");
+            return; // Detiene la ejecución
+        }
+    }
 
     //valido que hayan mandado todo
     if (empty($titulo) || empty($sinopsis) || empty($duracion) || empty($genero) || empty($puntaje)){
