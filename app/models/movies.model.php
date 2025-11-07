@@ -6,11 +6,9 @@ class MoviesModel{
 
     public function __construct()
     {
-        $this->db = new PDO("mysql:host=".MYSQL_HOST.
-                            ";dbname=".MYSQL_DB.
-                            ";charset=utf8",
-                            MYSQL_USER,MYSQL_PASS);
-        $this->_deploy();
+        $this->db = new PDO('mysql:host=localhost;dbname=movies_db;charset=utf8', 'root', '');
+
+        /*$this->_deploy();*/
     }
 
     function getItemById($id){
@@ -84,7 +82,7 @@ class MoviesModel{
 
 
 
-    private function _deploy() {
+    /*private function _deploy() {
         $query = $this->db->query('SHOW TABLES');
         $tables = $query->fetchAll();
         if(count($tables) == 0) {
@@ -94,6 +92,6 @@ class MoviesModel{
     }
     // Entre los dos END deberia poner el script de creacion de tablas, pero como la cadena de caracteres supera por muchisimo el limite 
     // de caracteres permitidos, lo dejo asi para no tener errores, intente varias cosas para que funcione pero no pude.
-    }
+    }*/
 
 }
