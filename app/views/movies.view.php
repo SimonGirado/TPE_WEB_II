@@ -18,9 +18,9 @@ class MoviesView{
         require_once 'templates/modifier.phtml';
     }
         function showError($msg){
-            echo "<h1> ERROR! </h1>";
-            echo "<h2> $msg </h2>";
-
+            require_once 'templates/header.phtml';
+            require_once 'templates/error.phtml';
+            require_once 'templates/footer.phtml';
         }
     }
     /*
