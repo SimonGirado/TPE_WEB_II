@@ -71,6 +71,14 @@ switch ($params[0]) {
             $controller->updateMovie($params[1]);
             }
         break;
+    case 'movie':
+        $controller = new MoviesController($res);
+        if (!empty($params[1]) && is_numeric($params[1])) {
+            $controller->showPeliculaById($params[1]);
+        } else {
+            $controller->showMovies();
+        }
+    break;
 
     default:
         echo "404 Page Not Found";

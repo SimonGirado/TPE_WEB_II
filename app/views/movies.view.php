@@ -22,6 +22,12 @@ class MoviesView{
             require_once 'templates/error.phtml';
             require_once 'templates/footer.phtml';
         }
+
+        public function ShowDetalle($movie)
+    {
+        require 'templates/detalle.phtml';
+        require 'templates/footer.phtml';
+    }
     }
     /*
      */

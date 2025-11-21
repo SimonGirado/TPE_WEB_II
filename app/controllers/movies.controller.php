@@ -102,4 +102,22 @@ class MoviesController {
         $this->model->removeMovie($id);
         header("Location: " . BASE_URL);
     }
+        public function showPeliculaById($id)
+{
+    $movie = $this->model->getItemById($id);
+
+    if ($movie) {
+        if ($movie->img) {
+            $movie->imagen_base64 = base64_encode($movie->img);
+            $movie->mime = 'image/jpeg';
+        } else {
+            $movie->imagen_base64 = null;
+        }
+        $this->view->ShowDetalle($movie);
+    } 
+    else {
+        $this->view->showError("La pelicula no existe");
+    }
+}
+
 }
